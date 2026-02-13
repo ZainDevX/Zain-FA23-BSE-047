@@ -101,6 +101,10 @@ weather-logger/
 
 ## Screenshots
 
+<p align="center">
+  <img src="Screenshot.jpg" alt="Weather Logger Dashboard" width="700" />
+</p>
+
 > The dashboard displays a hero card with the current temperature, metric cards for wind data, and a collapsible raw log section.
 
 ---
