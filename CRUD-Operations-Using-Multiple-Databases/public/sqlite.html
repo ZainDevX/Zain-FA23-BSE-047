@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SQLite CRUD | Multi-DB</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="/" class="logo">Multi<span>DB</span> CRUD</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="mongo.html">MongoDB</a>
+      <a href="mysql.html">MySQL</a>
+      <a href="sqlite.html" class="active">SQLite</a>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <h2>SQLite — User Management</h2>
+      <span class="badge sqlite">better-sqlite3</span>
+    </div>
+
+    <!-- Add User Form -->
+    <div class="form-card">
+      <h3>Add New User</h3>
+      <form id="addForm" class="form-row">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" id="name" placeholder="John Doe" required />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="john@example.com" required />
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="text" id="phone" placeholder="9876543210" required />
+        </div>
+        <button type="submit" class="btn btn-primary">+ Add</button>
+      </form>
+    </div>
+
+    <!-- Users Table -->
+    <div class="table-card">
+      <div class="table-header">
+        <h3>All Users</h3>
+        <span class="count" id="userCount">0 users</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="userTableBody">
+          <tr>
+            <td colspan="5">
+              <div class="empty-state">
+                <div class="empty-icon">📭</div>
+                <p>No users found. Add one above!</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Edit Modal -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal">
+      <h3>Edit User</h3>
+      <form id="editForm">
+        <input type="hidden" id="editId" />
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" id="editName" required />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="editEmail" required />
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="text" id="editPhone" required />
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn btn-success">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <footer class="footer">Multi-DB CRUD &mdash; SQLite with better-sqlite3</footer>
+
+  <script src="js/sqlite.js"></script>
+</body>
+</html>

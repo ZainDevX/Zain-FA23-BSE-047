@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multi-DB CRUD | Home</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="/" class="logo">Multi<span>DB</span> CRUD</a>
+    <nav>
+      <a href="/" class="active">Home</a>
+      <a href="mongo.html">MongoDB</a>
+      <a href="mysql.html">MySQL</a>
+      <a href="sqlite.html">SQLite</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>CRUD with <span>Multiple Databases</span></h1>
+    <p>A single Node.js application performing Create, Read, Update &amp; Delete operations across MongoDB, MySQL, and SQLite databases.</p>
+  </section>
+
+  <!-- Database Cards -->
+  <section class="cards-grid">
+
+    <a href="mongo.html" class="db-card">
+      <div class="icon mongo">M</div>
+      <h3>MongoDB</h3>
+      <p>NoSQL document database. Uses Mongoose ODM for schema validation and queries.</p>
+    </a>
+
+    <a href="mysql.html" class="db-card">
+      <div class="icon mysql">S</div>
+      <h3>MySQL</h3>
+      <p>Relational database with structured tables. Uses mysql2 driver with prepared statements.</p>
+    </a>
+
+    <a href="sqlite.html" class="db-card">
+      <div class="icon sqlite">L</div>
+      <h3>SQLite</h3>
+      <p>Lightweight file-based database. Uses better-sqlite3 for synchronous, fast operations.</p>
+    </a>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    Multi-DB CRUD &mdash; Built with Node.js &amp; Express
+  </footer>
+
+</body>
+</html>
