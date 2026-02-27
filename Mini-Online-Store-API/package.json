@@ -1,0 +1,19 @@
+{
+  "name": "mini-online-store-api",
+  "version": "1.0.0",
+  "description": "Express.js Lab Project – Mini Online Store API demonstrating MVC Pattern, Middleware, Routing & Express Router",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": ["express", "mvc", "api", "lab"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

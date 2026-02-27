@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Online Store</title>
+
+  <!-- Google Fonts — Inter for clean, modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Lucide Icons — lightweight, clean SVG icon set -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- App styles -->
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- ======================= TOAST CONTAINER ========================= -->
+  <div id="toast-container"></div>
+
+  <!-- ========================== NAVBAR =============================== -->
+  <nav class="navbar">
+    <div class="navbar-inner container">
+      <a href="/" class="navbar-brand">
+        <i data-lucide="shopping-bag" class="brand-icon"></i>
+        <span>MiniStore</span>
+      </a>
+      <div class="navbar-links">
+        <a href="#products-section" class="nav-link active" data-section="products">
+          <i data-lucide="package"></i> Products
+        </a>
+        <a href="#users-section" class="nav-link" data-section="users">
+          <i data-lucide="users"></i> Users
+        </a>
+        <a href="#api-section" class="nav-link" data-section="api">
+          <i data-lucide="terminal"></i> API Tester
+        </a>
+      </div>
+      <!-- Auth token (persistent in navbar) -->
+      <div class="navbar-auth">
+        <div class="token-badge" id="token-status">
+          <i data-lucide="lock" class="token-icon"></i>
+          <span>No Token</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========================== HERO ================================= -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Mini Online Store <span class="accent">API</span></h1>
+        <p class="hero-sub">
+          A scalable Express.js lab project demonstrating MVC architecture,
+          middleware, routing, and Express Router.
+        </p>
+        <div class="hero-stats">
+          <div class="stat-card">
+            <i data-lucide="box"></i>
+            <div>
+              <span class="stat-value" id="stat-products">—</span>
+              <span class="stat-label">Products</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i data-lucide="shield-check"></i>
+            <div>
+              <span class="stat-value" id="stat-users">3</span>
+              <span class="stat-label">Users</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i data-lucide="git-branch"></i>
+            <div>
+              <span class="stat-value">3</span>
+              <span class="stat-label">API Routes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================= MAIN ================================= -->
+  <main class="container main-content">
+
+    <!-- ─────────── TOKEN BAR ─────────── -->
+    <section class="token-bar card">
+      <div class="token-bar-inner">
+        <div class="token-info">
+          <i data-lucide="key-round"></i>
+          <div>
+            <h3>Authorization Token</h3>
+            <p>Required for /users endpoints. Enter any value to simulate authentication.</p>
+          </div>
+        </div>
+        <div class="token-controls">
+          <input
+            type="text"
+            id="auth-token"
+            class="input"
+            placeholder="e.g. Bearer my-secret-token"
+          />
+          <button class="btn btn-accent" id="btn-set-token">
+            <i data-lucide="unlock"></i> Set Token
+          </button>
+          <button class="btn btn-ghost" id="btn-clear-token">
+            <i data-lucide="x"></i> Clear
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── PRODUCTS SECTION ─────────── -->
+    <section id="products-section" class="section">
+      <div class="section-header">
+        <div>
+          <h2><i data-lucide="package"></i> Products</h2>
+          <p class="section-sub">Public endpoint — no authentication required</p>
+        </div>
+        <div class="section-actions">
+          <span class="badge badge-public"><i data-lucide="globe"></i> Public</span>
+          <button class="btn btn-primary" id="btn-load-products">
+            <i data-lucide="refresh-cw"></i> Load Products
+          </button>
+        </div>
+      </div>
+
+      <div class="endpoint-tag">
+        <span class="method get">GET</span>
+        <code>/products</code>
+      </div>
+
+      <div id="products-grid" class="products-grid">
+        <div class="empty-state">
+          <i data-lucide="package-open"></i>
+          <p>Click <strong>Load Products</strong> to fetch items from the API</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── USERS SECTION ─────────── -->
+    <section id="users-section" class="section">
+      <div class="section-header">
+        <div>
+          <h2><i data-lucide="users"></i> Users</h2>
+          <p class="section-sub">Protected endpoint — authorization token required</p>
+        </div>
+        <span class="badge badge-protected"><i data-lucide="shield"></i> Protected</span>
+      </div>
+
+      <div class="users-grid">
+        <!-- GET user by ID -->
+        <div class="card user-card">
+          <div class="card-header">
+            <h3><i data-lucide="search"></i> Find User by ID</h3>
+            <div class="endpoint-tag">
+              <span class="method get">GET</span>
+              <code>/users/:id</code>
+            </div>
+          </div>
+          <div class="card-body">
+            <label class="label" for="user-id-input">User ID</label>
+            <div class="input-group">
+              <input
+                type="number"
+                id="user-id-input"
+                class="input"
+                placeholder="Enter user ID (e.g. 1)"
+                min="1"
+              />
+              <button class="btn btn-primary" id="btn-get-user">
+                <i data-lucide="arrow-right"></i> Fetch
+              </button>
+            </div>
+          </div>
+          <div class="card-result" id="get-user-result"></div>
+        </div>
+
+        <!-- POST create user -->
+        <div class="card user-card">
+          <div class="card-header">
+            <h3><i data-lucide="user-plus"></i> Create New User</h3>
+            <div class="endpoint-tag">
+              <span class="method post">POST</span>
+              <code>/users</code>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="label" for="new-user-name">Full Name</label>
+              <input type="text" id="new-user-name" class="input" placeholder="Your Name" />
+            </div>
+            <div class="form-group">
+              <label class="label" for="new-user-email">Email</label>
+              <input type="email" id="new-user-email" class="input" placeholder="name@mail.com" />
+            </div>
+            <div class="form-group">
+              <label class="label" for="new-user-role">Role</label>
+              <select id="new-user-role" class="input">
+                <option value="customer">Customer</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+            <button class="btn btn-primary btn-full" id="btn-create-user">
+              <i data-lucide="plus-circle"></i> Create User
+            </button>
+          </div>
+          <div class="card-result" id="create-user-result"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── API TESTER SECTION ─────────── -->
+    <section id="api-section" class="section">
+      <div class="section-header">
+        <div>
+          <h2><i data-lucide="terminal"></i> API Tester</h2>
+          <p class="section-sub">Send raw requests and inspect full JSON responses</p>
+        </div>
+      </div>
+
+      <div class="api-tester card">
+        <div class="api-tester-controls">
+          <select id="api-method" class="input method-select">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+          </select>
+          <input
+            type="text"
+            id="api-url"
+            class="input api-url-input"
+            placeholder="/products"
+          />
+          <button class="btn btn-primary" id="btn-send-api">
+            <i data-lucide="send"></i> Send
+          </button>
+        </div>
+
+        <div class="api-body-section" id="api-body-section" style="display:none;">
+          <label class="label">Request Body (JSON)</label>
+          <textarea
+            id="api-body"
+            class="input textarea"
+            rows="4"
+            placeholder='{ "name": "Dave", "email": "dave@example.com" }'
+          ></textarea>
+        </div>
+
+        <div class="api-response" id="api-response">
+          <div class="response-header">
+            <span><i data-lucide="file-json"></i> Response</span>
+            <span class="status-badge" id="api-status"></span>
+          </div>
+          <pre id="api-output" class="code-block">// Response will appear here...</pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================= FOOTER ================================ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <i data-lucide="shopping-bag"></i>
+        <span>MiniStore API</span>
+      </div>
+      <p>Express.js Lab Project — MVC Architecture Demo</p>
+      <div class="footer-links">
+        <span><i data-lucide="layers"></i> Express.js</span>
+        <span><i data-lucide="folder-tree"></i> MVC Pattern</span>
+        <span><i data-lucide="shield"></i> Middleware</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App logic -->
+  <script src="/js/app.js"></script>
+</body>
+</html>
